@@ -1,6 +1,7 @@
 *.log
 *~
 iexcel/
+development/
 .htaccess
 sitemap.xml
 sitemap.xml.gz
