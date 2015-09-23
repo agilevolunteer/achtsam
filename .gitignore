@@ -1,12 +1,13 @@
 *.log
 *~
-iexcel/
-development/
+iexcel
+development
 .htaccess
 sitemap.xml
 sitemap.xml.gz
 wp-config.php
 wp-content/advanced-cache.php
+/node_modules
 wp-content/backup-db/
 wp-content/backups/
 wp-content/blogs.dir/
