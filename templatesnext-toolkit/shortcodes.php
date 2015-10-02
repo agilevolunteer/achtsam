@@ -453,7 +453,7 @@ function tx_portfolio_function($atts, $content = null) {
 
 		if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
 			$return_string .= '<div class="tx-folio-img">';
-			$return_string .= '<div class="tx-folio-img-wrap"><img src="'.esc_url($thumb_image_url).'" alt="" class="folio-img" /></div>';
+			$return_string .= '<div class="tx-folio-img-wrap"><a href="'.esc_url(get_permalink()).'"><img src="'.esc_url($thumb_image_url).'" alt="" class="folio-img" /></a></div>';
 			$return_string .= '<div class="folio-links"><span>';	
 			$return_string .= '<a href="'.esc_url(get_permalink()).'" class="folio-linkico"><i class="fa fa-link"></i></a>';	
 			$return_string .= '<a href="'.esc_url($full_image_url[0]).'" class="tx-colorbox folio-zoomico"><i class="fa fa-search-plus"></i></a>';										

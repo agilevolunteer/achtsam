@@ -41,7 +41,8 @@ gulp.task "sync", ->
   browserSync.init({
     proxy: "vagrantpress.dev"
     files: [
-      childTheme+"/**/*"
+      childTheme+"/**/*",
+      toolkit+"/**/*"
     ]
     server: false
   })
