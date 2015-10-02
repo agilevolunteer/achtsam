@@ -8,6 +8,9 @@ sitemap.xml.gz
 wp-config.php
 wp-content/advanced-cache.php
 /node_modules
+/dist
+/achtsam.iml
+/.idea
 wp-content/backup-db/
 wp-content/backups/
 wp-content/blogs.dir/
