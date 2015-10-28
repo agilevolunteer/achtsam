@@ -1,11 +1,22 @@
-/*
- Theme Name:   achtsam miteinander
- Theme URI:    http://agilevolunteer.com/achtsam-miteinander/
- Description:  achtsam-miteinander.de
- Author:       agilevolunteer
- Author URI:   http://agilevolunteer.com
- Template:     iexcel
- Version:      1.0.0
- License:      MIT
- Text Domain: i-excel
-*/
+.owl-item.active
+  .tx-slide
+    &-button
+      @media (max-width: 399px)
+        font-size 14px
+
+    &-title
+      white-space nowrap
+      @media (max-width: 359px)
+        font-size 18px
+        margin-bottom 6px
+
+.tx-slide-content
+  .tx-slide-content-inner
+    @media (max-width: 480px)
+      padding-top 24px !important
+    @media (max-width: 399px)
+      padding 16px 0 8px 0 !important
+    @media (max-width: 399px)
+      padding 8px 0 8px 0 !important
+
+
