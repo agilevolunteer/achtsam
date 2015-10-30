@@ -27,7 +27,7 @@ parentTheme = dist + 'themes/iexcel'
 toolkit = dist + 'plugins/templatesnext-toolkit'
 
 gulp.task "init:child", ->
-  return gulp.src(["achtsam-child/**/*.{css,php,js,mo}"])
+  return gulp.src(["achtsam-child/**/*.{php,mo}"])
     .pipe(changed(childTheme))
     .pipe(gulp.dest(childTheme))
 
@@ -40,11 +40,20 @@ gulp.task "init:toolkit", ->
     .pipe(changed(toolkit))
     .pipe(gulp.dest(toolkit))
 
+gulp.task "scripts", ->
+  return gulp.src([
+      "vendor/**/*.js",
+      "achtsam-child/scripts/*.js"
+    ])
+    .pipe(concat("achtsam.js"))
+    .pipe(gulp.dest(childTheme + "/scripts"))
+
 gulp.task "styles", ->
   return gulp.src([
       "iexcel/style.css",
       "achtsam-child/style.styl"
-      "iexcel/css/owl*.css",
+      "achtsam-child/**/*.css",
+      "vendor/**/*.css",
 
   ])
     .pipe(gif(/[.]styl$/, stylus()))
@@ -80,16 +89,18 @@ gulp.task "sync", ->
       childTheme+"/**/*",
       toolkit+"/**/*"
     ]
-    server: false
+    server: false,
+    open: false
   })
 
 gulp.task "watch", ->
-  gulp.watch ["./achtsam-child/**/*.styl"], ["styles"]
-  gulp.watch ["./achtsam-child/**/*"], ["init:child"]
+  gulp.watch ["./achtsam-child/**/*.{styl,css}"], ["styles"]
+  gulp.watch ["./achtsam-child/**/*.{js,coffee}"], ["scripts"]
+  gulp.watch ["./achtsam-child/**/*.{php,mo}"], ["init:child"]
   gulp.watch ["./templatesnext-toolkit/**/*"], ["init:toolkit"]
 
-gulp.task "rev", ["styles"], ->
-  return gulp.src(childTheme+"/**/*.css")
+gulp.task "rev", ["styles", "scripts"], ->
+  return gulp.src(childTheme+"/**/*.{css,js}")
     .pipe(rev())
     .pipe(gulp.dest(childTheme))
     .pipe(rev.manifest())
@@ -112,5 +123,5 @@ gulp.task 'images', ->
     .pipe(gulp.dest(dist))
 
 gulp.task "default", ["rev", "init:parent", "init:child", "init:toolkit"]
-gulp.task "init:dev", ["styles", "init:parent", "init:child", "init:toolkit"]
+gulp.task "init:dev", ["styles", "scripts", "init:parent", "init:child", "init:toolkit"]
 gulp.task "develop", ["init:dev", "watch", "sync"]

@@ -30,6 +30,25 @@ function achtsam_scripts_styles(){
 	wp_dequeue_style("owl-carousel");
 	wp_dequeue_style("owl-carousel-theme");
 	wp_dequeue_style("owl-carousel-transitions");
+	wp_dequeue_style( 'tx-style');
+
+	wp_dequeue_script("owl-carousel");
+	wp_dequeue_script('tx-script');
+
+
+	$filePath = get_stylesheet_directory()."/rev-manifest.json";
+	$scriptPath = "";
+	if (file_exists($filePath)){
+		$string = file_get_contents($filePath);
+		$json_a = json_decode($string, true);
+		$scriptPath = get_stylesheet_directory()."/".$json_a['scripts/achtsam.js'];
+	} else {
+		$scriptPath = get_stylesheet_directory()."/scripts/achtsam.js";
+	}
+
+	wp_enqueue_script( 'achtsam', get_stylesheet_directory_uri()."/scripts/achtsam.js", array( 'jquery' ), '', true );
+	//wp_enqueue_script( 'iexcel-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '2013-07-18', true );
+
 }
 
 
