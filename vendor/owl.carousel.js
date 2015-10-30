@@ -455,7 +455,6 @@
 		} else {
 			$.each(overwrites, function(breakpoint) {
 				if (breakpoint <= viewport && breakpoint > match) {
-          console.log("match", breakpoint, viewport, match);
 					match = Number(breakpoint);
 				}
 			});
