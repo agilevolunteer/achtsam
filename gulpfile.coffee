@@ -8,6 +8,12 @@ concat = require("gulp-concat")
 wrapper = require("gulp-wrapper")
 uglifycss = require("gulp-uglifycss")
 gif = require("gulp-if")
+imagemin = require('gulp-imagemin')
+pngquant = require('imagemin-pngquant')
+imageminMozjpeg = require('imagemin-mozjpeg')
+imageop = require('gulp-image-optimization')
+rev = require("gulp-rev")
+jpegoptim = require('imagemin-jpegoptim')
 
 browserSync = require('browser-sync').create()
 
@@ -16,6 +22,7 @@ if argv._[0] is "develop"
   dist = 'development/wordpress/wp-content/'
 
 childTheme = dist + 'themes/achtsam-child'
+childStyle = childTheme + '/style'
 parentTheme = dist + 'themes/iexcel'
 toolkit = dist + 'plugins/templatesnext-toolkit'
 
@@ -34,7 +41,12 @@ gulp.task "init:toolkit", ->
     .pipe(gulp.dest(toolkit))
 
 gulp.task "styles", ->
-  return gulp.src(["iexcel/style.css","achtsam-child/style.styl"])
+  return gulp.src([
+      "iexcel/style.css",
+      "achtsam-child/style.styl"
+      "iexcel/css/owl*.css",
+
+  ])
     .pipe(gif(/[.]styl$/, stylus()))
   .pipe(uglifycss())
   .pipe(concat("style.css"))
@@ -54,7 +66,8 @@ gulp.task "styles", ->
 
 """
     }))
-  .pipe(gulp.dest(childTheme))
+  .pipe(gulp.dest(childStyle))
+
 
 gulp.task "clean", ->
   return gulp.src('dist', {read: false})
@@ -75,7 +88,29 @@ gulp.task "watch", ->
   gulp.watch ["./achtsam-child/**/*"], ["init:child"]
   gulp.watch ["./templatesnext-toolkit/**/*"], ["init:toolkit"]
 
+gulp.task "rev", ["styles"], ->
+  return gulp.src(childTheme+"/**/*.css")
+    .pipe(rev())
+    .pipe(gulp.dest(childTheme))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest(childTheme))
 
+gulp.task 'images', ->
+  return gulp.src('assets/**/*')
+    .pipe(imagemin({
+      progressive: true
+      svgoPlugins: [{removeViewBox: false}]
+      optimizationlevel: 4
+      use: [
+        pngquant()
+        jpegoptim({
+          progressive: true
+          max: 30
+        })
+      ]
+    }))
+    .pipe(gulp.dest(dist))
 
-gulp.task "default", ["styles", "init:parent", "init:child", "init:toolkit"]
-gulp.task "develop", ["default", "watch", "sync"]
+gulp.task "default", ["rev", "init:parent", "init:child", "init:toolkit"]
+gulp.task "init:dev", ["styles", "init:parent", "init:child", "init:toolkit"]
+gulp.task "develop", ["init:dev", "watch", "sync"]
