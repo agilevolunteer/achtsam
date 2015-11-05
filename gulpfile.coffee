@@ -14,6 +14,8 @@ imageminMozjpeg = require('imagemin-mozjpeg')
 imageop = require('gulp-image-optimization')
 rev = require("gulp-rev")
 jpegoptim = require('imagemin-jpegoptim')
+webpagetest = require "webpagetest"
+
 
 browserSync = require('browser-sync').create()
 
@@ -121,6 +123,42 @@ gulp.task 'images', ->
       ]
     }))
     .pipe(gulp.dest(dist))
+
+gulp.task 'test-perf', ->
+  wpt = new webpagetest('www.webpagetest.org', 'A.6a7a1638d3a8b2534c41126324bbf21e')
+  parameters =
+    disableHTTPHeaders: true
+    private: true
+    video: true
+    location: 'ec2-eu-central-1:Firefox'
+
+  testSpecs =
+    runs:
+      1:
+        firstView:
+          SpeedIndex: 1500
+    median:
+      firstView:
+        bytesIn: 1000000
+        visualComplete: 2000
+
+  wpt.runTest 'http://achtsam.agilevolunteer.com', parameters, (err, data) ->
+    testID = data.data.testId
+    checkStatus = ->
+      wpt.getTestStatus testID, (err, data) ->
+        console.log "Status for #{testID}: #{data.data.statusText}"
+        unless data.data.completeTime
+          setTimeout checkStatus, 5000
+        else
+          wpt.getTestResults testID, specs: testSpecs, (err, data) ->
+
+            console.log "http://www.webpagetest.org/result/#{testID}/"
+            console.log data
+
+            process.exit 1 if err > 0
+
+    checkStatus()
+
 
 gulp.task "default", ["rev", "init:parent", "init:child", "init:toolkit"]
 gulp.task "init:dev", ["styles", "scripts", "init:parent", "init:child", "init:toolkit"]

@@ -39,6 +39,7 @@
     "gulp-wrapper": "^1.0.0",
     "imagemin-mozjpeg": "^5.1.0",
     "imagemin-pngquant": "^4.2.0",
+    "webpagetest": "^0.3.3",
     "yargs": "^3.26.0"
   },
   "dependencies": {

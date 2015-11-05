@@ -1,28 +1,84 @@
 base = #963d53
-
+smaller = "(max-width: 359px)"
+small = "(max-width: 399px)"
+medium = "(max-width: 480px)"
+large = "(max-width: 580px)"
 .owl-item.active
   .tx-slide
     &-button
-      @media (max-width: 399px)
+      @media small
         font-size 14px
 
     &-title
       white-space nowrap
-      @media (max-width: 359px)
+      @media smaller
         font-size 18px
         margin-bottom 6px
 
 .tx-slide-content
   .tx-slide-content-inner
-    @media (max-width: 480px)
+    @media medium
       padding-top 24px !important
-    @media (max-width: 399px)
+    @media small
       padding 16px 0 8px 0 !important
-    @media (max-width: 399px)
+    @media small
       padding 8px 0 8px 0 !important
 
 .owl-item.cloned:not(.active)
   visibility hidden
+.em-booking
+  label
+    white-space nowrap
+    min-width 90px
+    margin-right 5px
 
+  input[name=rememberme]
+    padding-left 5px
+
+  input.input
+  textarea
+    width 100%
+  .em-ticket-select
+    width 100%
+    padding-top 5px
+    padding-bottom 5px
+  &-form-details
+    width 50%
+    float left
+    padding-right 20px
+
+    @media large
+      float none
+      width 100%
+      border-bottom 1px solid black
+      padding-bottom 20px
+
+  &-login
+    float left
+    width 50%
+    @media large
+      float none
+      width 100%
+      padding-left 10px !important
+      border-left 0 !important
+    margin-left 0 !important
+.event-categories
+  padding-left 0
+  margin-top 0
+  li
+    float left
+    list-style-type none
+    margin-left 5px
+    padding 0px 4px
+    border-radius 3px
+    background lighten(base, 10)
+    border 1px solid darken(base, 10)
+    a
+     color lighten(base, 50)
+
+.home
+  th.event-time
+  th.event-description
+    font-size 16px
 
 
