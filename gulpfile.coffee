@@ -15,6 +15,7 @@ imageop = require('gulp-image-optimization')
 rev = require("gulp-rev")
 jpegoptim = require('imagemin-jpegoptim')
 webpagetest = require "webpagetest"
+request = require "request"
 
 
 browserSync = require('browser-sync').create()
@@ -118,11 +119,20 @@ gulp.task 'images', ->
         pngquant()
         jpegoptim({
           progressive: true
-          max: 30
+          max: 40
         })
       ]
     }))
     .pipe(gulp.dest(dist))
+
+
+gulp.task "addResult", ->
+
+  console.log "added test result"
+  request 'http://root.moerssl.net/perf/speed/addResult?testId=151128_Y3_799aea16f2a52d0cc7b882f7e6c9a597/', (error, response, body) ->
+    if (!error && response.statusCode == 200)
+      console.log(body) # Show the HTML for the Google homepage.
+
 
 gulp.task 'test-perf', ->
   wpt = new webpagetest('www.webpagetest.org', 'A.6a7a1638d3a8b2534c41126324bbf21e')
@@ -142,7 +152,7 @@ gulp.task 'test-perf', ->
         bytesIn: 1000000
         visualComplete: 2000
 
-  wpt.runTest 'http://achtsam.agilevolunteer.com', parameters, (err, data) ->
+  wpt.runTest 'http://achtsam-miteinander.de', parameters, (err, data) ->
     testID = data.data.testId
     checkStatus = ->
       wpt.getTestStatus testID, (err, data) ->
@@ -155,7 +165,11 @@ gulp.task 'test-perf', ->
             console.log "http://www.webpagetest.org/result/#{testID}/"
             console.log data
 
-            process.exit 1 if err > 0
+            console.log 'calling http://root.moerssl.net/perf/speed/addResult?testId='+testID+'/'
+            request 'http://root.moerssl.net/perf/speed/addResult?testId='+testID+'/', (error, response, body) ->
+              if (!error && response.statusCode == 200)
+                console.log(body) # Show the HTML for the Google homepage.
+              process.exit 1 if err > 0
 
     checkStatus()
 
