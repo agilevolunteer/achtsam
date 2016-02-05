@@ -30,7 +30,7 @@ parentTheme = dist + 'themes/iexcel'
 toolkit = dist + 'plugins/templatesnext-toolkit'
 
 gulp.task "init:child", ->
-  return gulp.src(["achtsam-child/**/*.{php,mo}"])
+  return gulp.src(["achtsam-child/**/*.{php,mo,png,jpg}"])
     .pipe(changed(childTheme))
     .pipe(gulp.dest(childTheme))
 
@@ -65,7 +65,7 @@ gulp.task "styles", ->
   .pipe(wrapper({
       header: """
 /*
- Theme Name:   achtsam miteinander generated
+ Theme Name:   achtsam miteinander
  Theme URI:    http://agilevolunteer.com/achtsam-miteinander/
  Description:  achtsam-miteinander.de
  Author:       agilevolunteer
