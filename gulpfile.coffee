@@ -97,10 +97,10 @@ gulp.task "sync", ->
   })
 
 gulp.task "watch", ->
-  gulp.watch ["./achtsam-child/**/*.{styl,css}"], ["styles"]
-  gulp.watch ["./achtsam-child/**/*.{js,coffee}"], ["scripts"]
-  gulp.watch ["./achtsam-child/**/*.{php,mo}"], ["init:child"]
-  gulp.watch ["./templatesnext-toolkit/**/*"], ["init:toolkit"]
+  gulp.watch ["achtsam-child/**/*.{styl,css}"], ["styles"]
+  gulp.watch ["achtsam-child/**/*.{js,coffee}"], ["scripts"]
+  gulp.watch ["achtsam-child/**/*.{php,mo}"], ["init:child"]
+  gulp.watch ["templatesnext-toolkit/**/*"], ["init:toolkit"]
 
 gulp.task "rev", ["styles", "scripts"], ->
   return gulp.src(childTheme+"/**/*.{css,js}")

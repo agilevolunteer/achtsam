@@ -1,0 +1,26 @@
+.agv
+  &-clear
+    clear both
+  &-event
+    width 49%
+    display inline-block
+    vertical-align top
+    padding-right 15px
+    margin-bottom 16px
+    &__taxonomy
+      clear both
+    &__cta
+      margin-top .5em
+      text-align right
+      white-space nowrap
+      .agv-event & a.agv-button
+        background base
+        color white
+        padding .75em 1.5em
+        font-weight bolder
+        border-radius 5px
+        border 1px solid darken(base, 10%)
+
+    @media large
+      display block
+      width 100%

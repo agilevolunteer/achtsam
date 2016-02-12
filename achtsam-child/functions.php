@@ -64,3 +64,14 @@ function wpi_stylesheet_uri($stylesheet_uri, $stylesheet_dir_uri){
 	}
 }
 
+add_filter( 'em_content_events_args', 'agv_content_events_list');
+function agv_content_events_list($args) {
+
+	$filePath = get_stylesheet_directory() . "/events/list-template.php";
+	if ( file_exists( $filePath ) ) {
+		$format = file_get_contents( $filePath );
+		$args["format"] = $format;
+	}
+
+	return $args;
+}

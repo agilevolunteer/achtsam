@@ -1,4 +1,5 @@
 base = #963d53
+sec = #9c9c9c
 smaller = "(max-width: 359px)"
 small = "(max-width: 399px)"
 medium = "(max-width: 480px)"
@@ -66,13 +67,15 @@ large = "(max-width: 580px)"
   padding-left 0
   margin-top 0
   li
-    float left
+    display inline-block
     list-style-type none
     margin-left 5px
     padding 0px 4px
     border-radius 3px
     background lighten(base, 10)
     border 1px solid darken(base, 10)
+    &:after
+      clear both
     a
      color lighten(base, 50)
 
@@ -90,3 +93,5 @@ large = "(max-width: 580px)"
   img
     padding 5px
     opacity .25
+
+@import 'style/events.styl'
