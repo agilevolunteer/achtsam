@@ -4,6 +4,8 @@ smaller = "(max-width: 359px)"
 small = "(max-width: 399px)"
 medium = "(max-width: 480px)"
 large = "(max-width: 580px)"
+contentPadding = 16px
+
 .owl-item.active
   .tx-slide
     &-button
@@ -66,7 +68,13 @@ large = "(max-width: 580px)"
 .event-categories
   padding-left 0
   margin-top 0
+  margin-bottom 0
+  display inline-block
+  padding-right 4px
   li
+  & > a:visited
+  & > a
+  & > a:active
     display inline-block
     list-style-type none
     margin-left 5px
@@ -76,8 +84,14 @@ large = "(max-width: 580px)"
     border 1px solid darken(base, 10)
     &:after
       clear both
+    &:first-child
+      margin-left 0px
     a
-     color lighten(base, 50)
+      &:visited
+      &:active
+      &
+        color lighten(base, 50)
+
 
 .home
   th.event-time

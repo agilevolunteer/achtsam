@@ -66,12 +66,25 @@ function wpi_stylesheet_uri($stylesheet_uri, $stylesheet_dir_uri){
 
 add_filter( 'em_content_events_args', 'agv_content_events_list');
 function agv_content_events_list($args) {
-
-	$filePath = get_stylesheet_directory() . "/events/list-template.php";
+	if (is_front_page()){
+		$filePath = get_stylesheet_directory() . "/events/frontpage-template.php";
+	} else {
+		$filePath = get_stylesheet_directory() . "/events/list-template.php";
+	}
 	if ( file_exists( $filePath ) ) {
-		$format = file_get_contents( $filePath );
+		$format = agv_get_content( $filePath );
 		$args["format"] = $format;
 	}
 
 	return $args;
+}
+
+function agv_get_content( $path ) {
+	//$content = file_get_contents($dir.'app/workshopRegistrationApp.php');
+	ob_start();
+	include( $path );
+	$content = ob_get_contents();
+	ob_end_clean();
+
+	return $content;
 }

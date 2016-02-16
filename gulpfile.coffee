@@ -16,6 +16,7 @@ rev = require("gulp-rev")
 jpegoptim = require('imagemin-jpegoptim')
 webpagetest = require "webpagetest"
 request = require "request"
+plumber = require "gulp-plumber"
 
 
 browserSync = require('browser-sync').create()
@@ -48,6 +49,7 @@ gulp.task "scripts", ->
       "vendor/**/*.js",
       "achtsam-child/scripts/*.js"
     ])
+    .pipe(plumber())
     .pipe(concat("achtsam.js"))
     .pipe(gulp.dest(childTheme + "/scripts"))
 
@@ -59,7 +61,8 @@ gulp.task "styles", ->
       "vendor/**/*.css",
 
   ])
-    .pipe(gif(/[.]styl$/, stylus()))
+  .pipe(plumber())
+  .pipe(gif(/[.]styl$/, stylus()))
   .pipe(uglifycss())
   .pipe(concat("style.css"))
   .pipe(wrapper({
