@@ -22,10 +22,8 @@
             #_EVENTTAGS
         </div>
       </div>
-      <div>
-        <span class="agv-event__priceinfo">
-          ab <span class="agv-event__priceinfo-value">#_EVENTPRICEMIN</span>
-        </span>
+      <div class="agv-event__priceinfo">
+        ab <span class="agv-event__priceinfo-value">#_EVENTPRICEMIN</span>
       </div>
     </div>
     <div class="agv-event__cta">

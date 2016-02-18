@@ -61,7 +61,10 @@ gulp.task "styles", ->
       "vendor/**/*.css",
 
   ])
-  .pipe(plumber())
+  .pipe(plumber({
+      errorHandler: (e) ->
+        console.error(e)
+    }))
   .pipe(gif(/[.]styl$/, stylus()))
   .pipe(uglifycss())
   .pipe(concat("style.css"))
