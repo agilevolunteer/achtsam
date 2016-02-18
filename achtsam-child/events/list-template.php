@@ -14,7 +14,7 @@
           #_EVENTDATES
           #_24HSTARTTIME
         </div>
-        <div>
+        <div class="agv-event__abstract">
           #_EVENTEXCERPT{35,...}
         </div>
         <div class="agv-event__taxonomy">
