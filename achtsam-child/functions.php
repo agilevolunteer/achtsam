@@ -79,6 +79,24 @@ function agv_content_events_list($args) {
 	return $args;
 }
 
+
+add_filter('rwmb_meta', 'agv_rwmb_meta', 4, 4);
+function agv_rwmb_meta($meta, $key, $args, $post_id){
+	//always hide the title, because it is handled in the content template
+	if (get_post_type($post_id) == "event" && $key == "iexcel_hidetitle"){
+		return true;
+
+	}
+}
+
+
+add_filter('pre_option_dbem_bookings_currency_format', 'agv_currency_format');
+function agv_currency_format(){
+//	return "<span><span itemprop='price'>#</span><span itemprop='priceCurrency'>EUR</span></span>";
+		return "#";
+}
+
+
 function agv_get_content( $path ) {
 	//$content = file_get_contents($dir.'app/workshopRegistrationApp.php');
 	ob_start();
