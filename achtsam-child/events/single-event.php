@@ -7,6 +7,8 @@
       </span>
       <span class="agv-singleEvent__description">
         #_EVENTNOTES
+        <a name="booking"></a>
+
       </span>
 
     </div>
@@ -42,7 +44,6 @@
   </div>
   {has_bookings}
   <div class="agv-singleEvent__booking">
-    <a name="booking"></a>
 
     <h3>Teilnehmen in #_LOCATIONTOWN</h3>
     #_BOOKINGFORM

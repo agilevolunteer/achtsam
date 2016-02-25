@@ -56,7 +56,7 @@ gulp.task "scripts", ->
 gulp.task "styles", ->
   return gulp.src([
       "iexcel/style.css",
-      "achtsam-child/style.styl"
+      "achtsam-child/*.styl"
       "achtsam-child/**/*.css",
       "vendor/**/*.css",
 
@@ -64,6 +64,7 @@ gulp.task "styles", ->
   .pipe(plumber({
       errorHandler: (e) ->
         console.error(e)
+        return
     }))
   .pipe(gif(/[.]styl$/, stylus()))
   .pipe(uglifycss())
@@ -85,6 +86,7 @@ gulp.task "styles", ->
 """
     }))
   .pipe(gulp.dest(childStyle))
+  .pipe(browserSync.stream())
 
 
 gulp.task "clean", ->
