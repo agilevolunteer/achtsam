@@ -2,9 +2,9 @@
   <h1 class="agv-singleEvent__headline">#_EVENTNAME</h1>
   <div class="agv-singleEvent__main">
     <div class="agv-singleEvent__content">
-      <span class="agv-singleEvent__image">
-          <img src="#_CATEGORYIMAGEURL" alt="#_EVENTNAME" />
-      </span>
+      <!-- <img src="#_CATEGORYIMAGEURL" alt="#_EVENTNAME" /> -->
+      #_EVENTCATEGORIESIMAGES
+
       <span class="agv-singleEvent__description">
         #_EVENTNOTES
         <a name="booking"></a>
