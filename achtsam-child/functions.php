@@ -95,7 +95,7 @@ function agv_rwmb_meta($meta, $key, $args, $post_id){
 add_filter('pre_option_dbem_bookings_currency_format', 'agv_currency_format');
 function agv_currency_format(){
 //	return "<span><span itemprop='price'>#</span><span itemprop='priceCurrency'>EUR</span></span>";
-		return "#";
+		return "# @";
 }
 
 
