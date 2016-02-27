@@ -87,6 +87,8 @@ function agv_rwmb_meta($meta, $key, $args, $post_id){
 		return true;
 
 	}
+
+	return $meta;
 }
 
 
