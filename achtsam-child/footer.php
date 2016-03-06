@@ -37,5 +37,12 @@
 	</div><!-- #page -->
 
 	<?php wp_footer(); ?>
+
+	<?php if(!isset($_COOKIE["eu-cookie"])) { ?>
+		<div class="agv-eucookie" eu-cookie>
+			<span class="agv-eucookie__text">Diese Website benutzt Cookies. Wenn Sie die Website weiter nutzen, stimmen Sie der Verwendung von Cookies zu.</span>
+			<button class="agv-eucookie__accept">OK</button>
+		</div>
+	<?php } ?>
 </body>
 </html>
