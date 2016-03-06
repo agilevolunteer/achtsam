@@ -35,6 +35,10 @@ function achtsam_scripts_styles(){
 	wp_dequeue_script("owl-carousel");
 	wp_dequeue_script('tx-script');
 
+	if ( is_front_page() ) {
+		wp_dequeue_script('events-manager');
+	}
+
 
 	$filePath = get_stylesheet_directory()."/rev-manifest.json";
 	$scriptPath = "";
