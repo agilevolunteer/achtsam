@@ -6,6 +6,7 @@ shell = require("gulp-shell")
 changed = require("gulp-changed")
 concat = require("gulp-concat")
 wrapper = require("gulp-wrapper")
+uglify = require('gulp-uglify')
 uglifycss = require("gulp-uglifycss")
 gif = require("gulp-if")
 imagemin = require('gulp-imagemin')
@@ -17,9 +18,11 @@ jpegoptim = require('imagemin-jpegoptim')
 webpagetest = require "webpagetest"
 request = require "request"
 plumber = require "gulp-plumber"
+babel = require('gulp-babel')
 
 
-browserSync = require('browser-sync').create()
+browserSync = require('browser-sync')
+reload = browserSync.reload
 
 dist = 'dist/'
 if argv._[0] is "develop"
@@ -50,8 +53,13 @@ gulp.task "scripts", ->
       "achtsam-child/scripts/*.js"
     ])
     .pipe(plumber())
+    .pipe(babel({
+			presets: ['es2015']
+		}))
     .pipe(concat("achtsam.js"))
+    .pipe(uglify())
     .pipe(gulp.dest(childTheme + "/scripts"))
+    .pipe(reload({stream:true}))
 
 gulp.task "styles", ->
   return gulp.src([
@@ -86,7 +94,7 @@ gulp.task "styles", ->
 """
     }))
   .pipe(gulp.dest(childStyle))
-  .pipe(browserSync.stream())
+  .pipe(reload({stream:true}))
 
 
 gulp.task "clean", ->
