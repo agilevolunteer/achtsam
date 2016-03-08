@@ -35,6 +35,9 @@ function achtsam_scripts_styles(){
 	wp_dequeue_script("owl-carousel");
 	wp_dequeue_script('tx-script');
 
+	//slim jetpack
+	wp_dequeue_script( 'devicepx' );
+
 	if ( is_front_page() ) {
 		wp_dequeue_script('events-manager');
 	}
