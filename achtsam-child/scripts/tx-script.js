@@ -1,17 +1,17 @@
 jQuery(document).ready(function ($) {
-	
+
 		"use strict";
-		
+
 	var $window = jQuery(window),
 		body = jQuery('body'),
 		//windowheight = page.getViewportHeight(),
 		sitewidth = $('.site').width(),
-		maxwidth = $('.site-main').width(),		
+		maxwidth = $('.site-main').width(),
 		windowheight = $window.height(),
-		pageheight = $( document ).height(),		
-		windowwidth = $window.width();		
-	
-	
+		pageheight = $( document ).height(),
+		windowwidth = $window.width();
+
+
 	//client carousel
 	$('.tx-testimonials').each(function () {
 		$(this).owlCarousel({
@@ -27,14 +27,14 @@ jQuery(document).ready(function ($) {
 			addClassActive: true
 		});
 	});
-	
-	
+
+
 	//blog and portfolio carousel
 	$('.tx-carousel').each(function () {
-	
+
 		var _this = $('.tx-carousel');
 		var car_columns = _this.data('columns');
-			
+
 		$(this).owlCarousel({
 			items : car_columns,
 			stopOnHover : true,
@@ -62,14 +62,14 @@ jQuery(document).ready(function ($) {
       }
 		});
 	});
-	
-	
+
+
 	//Products carousel
 	$('.tx-prod-carousel').each(function () {
-	
+
 		var _this = $(this);
 		var car_columns = _this.data('columns');
-			
+
 		$(this).children('div').children('ul').owlCarousel({
 			items : car_columns,
 			stopOnHover : true,
@@ -85,16 +85,16 @@ jQuery(document).ready(function ($) {
 			addClassActive: true,
 			theme : "tx-owl-theme"
 		});
-	});	
-	
+	});
+
 	//Related Product
 	$('.related.products').each(function () {
-	
+
 		var _this = $(this);
 		var car_columns = _this.data('columns');
-		
+
 		car_columns = 4;
-			
+
 		$(this).children('ul').owlCarousel({
 			items : car_columns,
 			stopOnHover : true,
@@ -111,117 +111,117 @@ jQuery(document).ready(function ($) {
 			theme : "tx-owl-theme"
 		});
 	});
-	
-	
-	$('.tx-slider').each(function () {
 
-    var _this = $(this);
-    var slider_delay = _this.data('delay');
+	if ($('.tx-slider').length > 1){
+		$('.tx-slider').each(function () {
 
-    var hasMultipleSlides = ($(this).find(".owl-item").length > 1)
+	    var _this = $(this);
+	    var slider_delay = _this.data('delay');
 
-    $(this).owlCarousel({
-      autoPlay: slider_delay,
-      items: 1,
-      mouseDrag: hasMultipleSlides,
-      touchDrag: hasMultipleSlides,
-      pullDrag: hasMultipleSlides,
-      navRewind: false,
-      stopOnHover: true,
-      navigation: true,
-      paginationSpeed: 1000,
-      goToFirstSpeed: 2000,
-      singleItem: true,
-      autoHeight: false,
-      navigationText: ['<span class="genericon genericon-leftarrow"></span>', '<span class="genericon genericon-rightarrow"></span>'],
-      addClassActive: true,
-      theme: "tx-owl-theme",
-      pagination: true
-    });
-	});
-		
-			
+	    var hasMultipleSlides = ($(this).find(".owl-item").length > 1)
+
+	    $(this).owlCarousel({
+	      autoPlay: slider_delay,
+	      items: 1,
+	      mouseDrag: hasMultipleSlides,
+	      touchDrag: hasMultipleSlides,
+	      pullDrag: hasMultipleSlides,
+	      navRewind: false,
+	      stopOnHover: true,
+	      navigation: true,
+	      paginationSpeed: 1000,
+	      goToFirstSpeed: 2000,
+	      singleItem: true,
+	      autoHeight: false,
+	      navigationText: ['<span class="genericon genericon-leftarrow"></span>', '<span class="genericon genericon-rightarrow"></span>'],
+	      addClassActive: true,
+	      theme: "tx-owl-theme",
+	      pagination: true
+	    });
+		});
+	}
+
 	// colorboxpopup
 	$('.tx-colorbox').each(function () {
 		$(this).colorbox();
 	});
-	
+
 	// blog area masonry
 	//if ( $('.tx-post-row').length > 0 )
-	
-	$(window).load(function(){		
+
+	$(window).load(function(){
 		$('.tx-masonry').each(function () {
 			$(this).masonry({});
 		});
-	});	
-	
+	});
+
 	/*
 	$('.tx-blog').each(function () {
-		
+
 		console.log ('maso');
-		
+
 		var _this = $(this);
 		var container_3 = document.querySelector('.tx-blog');
 		var msnry_3 = new Masonry( container_3, {
 		  //itemSelector: '.widget'
-		});	
+		});
 	});
 	*/
-	
-	
+
+
 	/////////////////////////////////////////////
 	// Forcing Wide
-	/////////////////////////////////////////////	
+	/////////////////////////////////////////////
 
 	$.fn.widify = function() {
-		
+
 		this.each( function() {
 			var _this = $(this);
 			var fwheight = $(this).children('div').outerHeight();
 			var extrawidth = (sitewidth-maxwidth)/2+32;
-			
-			if(sitewidth > 1200)	
+
+			if(sitewidth > 1200)
 			{
 				_this.wrapInner( "<div class='tx-fullwidthinner'></div>" );
 
 				_this.css({"overflow":"visible"});
 				_this.children('.tx-fullwidthinner').css({"width":sitewidth+"px","position":"relative","margin-left":"-"+extrawidth+"px","overflow":"hidden"});
-				
-				//console.log ("yo max width : "+maxwidth+" sitewidth : "+sitewidth+" left: "+extrawidth);				
-				
+
+				//console.log ("yo max width : "+maxwidth+" sitewidth : "+sitewidth+" left: "+extrawidth);
+
 			}
-		
+
 
 			$(window).resize(function() {
 				//console.log("resized : "+$('.site').width()+",  Site width : "+sitewidth+", max width : "+maxwidth);
 				maxwidth = $('.site-main').width();
 				sitewidth = $('.site').width();
 				extrawidth = (sitewidth-maxwidth)/2+32;
-				
+
 				if(sitewidth > 1200) {
-					
+
 					if(!_this.children('div').hasClass('tx-fullwidthinner'))
 					{
 						_this.wrapInner( "<div style='position: relative; overflow: hidden;' class='tx-fullwidthinner'></div>" );
 						console.log("added");
-					}					
-					
+					}
+
 					_this.css({"overflow":"visible"});
-					_this.children('.tx-fullwidthinner').css({"width":sitewidth+"px","position":"relative","margin-left":"-"+extrawidth+"px"});				
+					_this.children('.tx-fullwidthinner').css({"width":sitewidth+"px","position":"relative","margin-left":"-"+extrawidth+"px"});
 				} else
 				{
-					
+
 					if(_this.children('div').hasClass('tx-fullwidthinner'))
 					{
 						_this.children('.tx-fullwidthinner').children().unwrap();
-					}	
+					}
 					_this.css({"height":"auto","overflow":"hidden"});
-					console.log("should be here");		
+					console.log("should be here");
 				}
-				
-			});				
-		
-		});	
+
+			});
+
+		});
     };
 
 	// forcing wide
@@ -229,11 +229,10 @@ jQuery(document).ready(function ($) {
 		if( $('body.tx-boxed').length < 1 && $('.has-left-sidebar').length < 1 && $('.has-right-sidebar').length < 1 )
 		{
 			$(this).widify();
-		}		
-	});	
-	
-	
+		}
+	});
+
+
 
 
 });
-
