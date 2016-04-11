@@ -25,14 +25,15 @@
         #d.#m.#Y #@_{ \b\i\s\ d.m.Y}<br />
         #_24HSTARTTIME Uhr
       </div>
+      <?php if ($agvDto && $agvDto->get_spaces()) { ?>
       <div class="agv-singleEvent__priceinfo">
-        ab <span class="agv-singleEvent__priceinfo-value">#_EVENTPRICEMIN</span>
+        <span class="agv-singleEvent__priceinfo-value">#_EVENTPRICEMIN</span>
       </div>
-      {has_bookings}
       <div class="agv-event__cta">
         <a href="#booking" class="agv-button agv-button--full">Anmelden <i class="fa fa-caret-right agv-button__icon"></i></a>
       </div>
-      {/has_bookings}
+      <?php } ?>
+
       <div class="agv-singleEvent__address">
         <strong>Adresse</strong><br/>
         #_LOCATIONNAME <br />
@@ -43,10 +44,12 @@
     </div>
   </div>
   {has_bookings}
+
   <div class="agv-singleEvent__booking">
 
     <h3>Teilnehmen in #_LOCATIONTOWN</h3>
     #_BOOKINGFORM
+
   </div>
   {/has_bookings}
 </article>

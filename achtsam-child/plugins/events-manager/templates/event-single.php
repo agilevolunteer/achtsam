@@ -17,7 +17,7 @@ global $EM_Event;
 $filePath = get_stylesheet_directory() . "/events/single-event.php";
 
 if ( file_exists( $filePath ) ) {
-  $format = agv_get_content( $filePath );
+  $format = agv_get_content( $filePath, $EM_Event );
   echo $EM_Event->output($format);
 } else {
   echo $EM_Event->output_single();

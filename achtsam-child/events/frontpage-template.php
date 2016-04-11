@@ -14,8 +14,7 @@
     </span>
 
     <span class="agv-event__priceinfo">
-      <i class="fa fa-money"></i>
-      ab <span class="agv-event__priceinfo-value">#_EVENTPRICEMIN</span>
+      <span class="agv-event__priceinfo-value">#_EVENTPRICEMIN</span>
     </span>
   </div>
   <?php

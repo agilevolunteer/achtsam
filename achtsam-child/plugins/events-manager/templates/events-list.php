@@ -10,7 +10,6 @@
  */
 $args = apply_filters('em_content_events_args', $args);
 //$args['arformat'] = 'foo';
-print_r($args);
 if( get_option('dbem_css_evlist') ) echo "<div class='css-events-list'>";
 
 echo EM_Events::output( $args );

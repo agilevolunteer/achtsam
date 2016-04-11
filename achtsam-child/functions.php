@@ -72,14 +72,14 @@ function wpi_stylesheet_uri($stylesheet_uri, $stylesheet_dir_uri){
 }
 
 add_filter( 'em_content_events_args', 'agv_content_events_list');
-function agv_content_events_list($args) {
+function agv_content_events_list($args, $dto = array()) {
 	if (is_front_page()){
 		$filePath = get_stylesheet_directory() . "/events/frontpage-template.php";
 	} else {
 		$filePath = get_stylesheet_directory() . "/events/list-template.php";
 	}
 	if ( file_exists( $filePath ) ) {
-		$format = agv_get_content( $filePath );
+		$format = agv_get_content( $filePath, $dto );
 		$args["format"] = $format;
 	}
 
@@ -105,8 +105,26 @@ function agv_currency_format(){
 		return "# @";
 }
 
+add_filter('em_event_output_placeholder', 'agv_event_output_placeholder', 10, 4);
+function agv_event_output_placeholder($a, $b,$c,$d){
+	if ($c == "#_EVENTPRICEMIN"){
 
-function agv_get_content( $path ) {
+		if ($b->get_spaces() == 0){
+			return "";
+		}
+
+
+		if (count($b->get_tickets()->tickets) > 1){
+			return "ab ".$a;
+		}
+		echo "Tikets".count($b->get_tickets()->tickets);
+
+	}
+	return $a;
+}
+
+
+function agv_get_content( $path, $agvDto = array() ) {
 	//$content = file_get_contents($dir.'app/workshopRegistrationApp.php');
 	ob_start();
 	include( $path );
