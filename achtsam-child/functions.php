@@ -109,7 +109,7 @@ add_filter('em_event_output_placeholder', 'agv_event_output_placeholder', 10, 4)
 function agv_event_output_placeholder($a, $b,$c,$d){
 	if ($c == "#_EVENTPRICEMIN"){
 
-		if ($b->get_spaces() == 0){
+		if ($b->get_spaces() == 0 || $b->get_tickets()->get_first() == false){
 			return "";
 		}
 
@@ -117,8 +117,6 @@ function agv_event_output_placeholder($a, $b,$c,$d){
 		if (count($b->get_tickets()->tickets) > 1){
 			return "ab ".$a;
 		}
-		echo "Tikets".count($b->get_tickets()->tickets);
-
 	}
 	return $a;
 }
