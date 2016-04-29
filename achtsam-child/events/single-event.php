@@ -25,7 +25,7 @@
         #d.#m.#Y #@_{ \b\i\s\ d.m.Y}<br />
         #_24HSTARTTIME Uhr
       </div>
-      <?php if ($agvDto && $agvDto->get_spaces() == 0 || $agvDto->get_tickets()->get_first() == false) { ?>
+      <?php if ($agvDto && $agvDto->get_spaces()) { ?>
       <div class="agv-singleEvent__priceinfo">
         <span class="agv-singleEvent__priceinfo-value">#_EVENTPRICEMIN</span>
       </div>
