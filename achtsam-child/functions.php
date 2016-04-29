@@ -117,7 +117,6 @@ function agv_event_output_placeholder($a, $b,$c,$d){
 		if (count($b->get_tickets()->tickets) > 1){
 			return "ab ".$a;
 		}
-		echo "Tikets".count($b->get_tickets()->tickets);
 
 	}
 	return $a;
