@@ -7,7 +7,11 @@ jQuery(() => {
   }
 
   $accept.click(() => {
-    document.cookie="eu-cookie=accept";
+    var now = new Date();
+    var time = now.getTime();
+    var expireTime = time + 1000*60*60*24*365;
+    now.setTime(expireTime);
+    document.cookie = 'eu-cookie=accept;expires='+now.toGMTString()+';path=/';
     $cookieContainer.hide().remove();
   });
 
